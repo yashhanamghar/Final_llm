@@ -14,7 +14,6 @@ def index():
         query = request.form["query"]
         response_data = get_answer(query)
 
-        # Keep JSON clean
         filtered_response = {
             "answer": response_data.get("answer", "")
         }
@@ -49,4 +48,7 @@ def hackrx_api():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
+    
